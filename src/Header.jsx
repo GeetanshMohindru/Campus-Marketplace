@@ -7,9 +7,9 @@ const Header = () => {
     <header style={styles.header}>
       <motion.div
         style={styles.logoContainer}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <h1 style={styles.logo}>Campus Marketplace</h1>
       </motion.div>
@@ -19,23 +19,18 @@ const Header = () => {
           style={styles.navItems}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1.2 }}
         >
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Link to="/home" style={styles.navLink}>Home</Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Link to="/sell" style={styles.navLink}>Sell</Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Link to="/admin" style={styles.navLink}>Admin</Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Link to="/aboutus" style={styles.navLink}>About Us</Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Link to="/" style={styles.navLink}>Log Out</Link>
-          </motion.div>
+          {["home","dashboard", "sell", "admin", "aboutus", ""].map((path, idx) => (
+            <motion.div key={idx} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                to={`/${path}`}
+                style={styles.navLink}
+              >
+                {path === "" ? "Log Out" : path.charAt(0).toUpperCase() + path.slice(1)}
+              </Link>
+            </motion.div>
+          ))}
         </motion.div>
       </nav>
     </header>
@@ -44,7 +39,8 @@ const Header = () => {
 
 const styles = {
   header: {
-    backgroundColor: "#2d87f0",
+    backgroundColor: "#7B3FE4",
+    // backgroundColor: "rgba(45, 135, 240, 0.9)",
     padding: "15px 30px",
     display: "flex",
     justifyContent: "space-between",
@@ -53,16 +49,21 @@ const styles = {
     position: "sticky",
     top: 0,
     zIndex: 1000,
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
+    fontFamily: "Poppins, sans-serif",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
   },
   logoContainer: {
     flex: 1,
   },
   logo: {
-    fontSize: "28px",
+    fontSize: "26px",
     fontWeight: "700",
-    letterSpacing: "1.5px",
     margin: 0,
+    letterSpacing: "1px",
   },
   navLinks: {
     display: "flex",
@@ -74,12 +75,19 @@ const styles = {
   },
   navLink: {
     color: "#fff",
-    fontSize: "18px",
+    fontSize: "16px",
     fontWeight: "500",
     textDecoration: "none",
+    position: "relative",
     textTransform: "uppercase",
-    transition: "color 0.3s ease, transform 0.3s ease",
+    paddingBottom: "4px",
+    transition: "all 0.3s ease",
   },
+};
+
+// Add hover effect via CSS-in-JS
+styles.navLink[':hover'] = {
+  borderBottom: "2px solid white",
 };
 
 export default Header;

@@ -11,24 +11,24 @@ const AboutUs = () => {
     },
     {
       id: 2,
-      name: "102383012 - Gitika Goyal",
-      email: "ggoyal_be22@thapar.edu",
+      name: "102203408 - Iipsita Devgan",
+      email: "idevgan_be22@thapar.edu",
     },
-    {
-      id: 3,
-      name: "102203421 - Naman Kumar",
-      email: "nkumar_be22@thapar.edu",
-    },
-    {
-      id: 4,
-      name: "102203436 - Nandini Jain",
-      email: "njain_be22@thapar.edu",
-    },
-    {
-      id: 5,
-      name: "102203397 - Pooja Maheshwari",
-      email: "pmaheshwari_be22@thapar.edu",
-    },
+    // {
+    //   id: 3,
+    //   name: "102203421 - Naman Kumar",
+    //   email: "nkumar_be22@thapar.edu",
+    // },
+    // {
+    //   id: 4,
+    //   name: "102203436 - Nandini Jain",
+    //   email: "njain_be22@thapar.edu",
+    // },
+    // {
+    //   id: 5,
+    //   name: "102203397 - Pooja Maheshwari",
+    //   email: "pmaheshwari_be22@thapar.edu",
+    // },
   ];
 
   const styles = {

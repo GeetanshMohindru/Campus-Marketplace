@@ -7,7 +7,7 @@ const App = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", password: "" });
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,7 +33,7 @@ const App = () => {
       const { data } = await axios.post(endpoint, payload);
       setMessage(data.message);
       if (!isRegistering) {
-        navigate("/home"); // Redirect to /home after login
+        navigate("/home");
       }
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred");
@@ -43,59 +43,75 @@ const App = () => {
   const styles = {
     container: {
       display: "flex",
+      minHeight: "100vh",
+      fontFamily: "'Poppins', sans-serif",
+      backgroundColor: "#f5f7fa",
+    },
+    leftPane: {
+      flex: 1,
+      display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      minHeight: "100vh",
-      backgroundColor: "#f0f4f8",
-      fontFamily: "'Poppins', sans-serif",
+      padding: "50px",
+    },
+    rightPane: {
+      flex: 1,
+      background: "linear-gradient(135deg, #a18cd1, #fbc2eb)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "40px",
+    },
+    illustration: {
+      maxWidth: "100%",
+      height: "auto",
+      borderRadius: "12px",
     },
     card: {
-      width: "400px",
-      padding: "25px",
-      borderRadius: "12px",
-      background: "linear-gradient(135deg, #ffffff, #e0e0e0)",
-      boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-      transition: "transform 0.3s, box-shadow 0.3s",
+      width: "100%",
+      maxWidth: "420px",
+      background: "#fff",
+      padding: "40px",
+      borderRadius: "16px",
+      boxShadow: "0 12px 24px rgba(0, 0, 0, 0.1)",
     },
     heading: {
-      textAlign: "center",
       fontSize: "28px",
       fontWeight: "700",
-      color: "#2d87f0",
+      color: "#333",
+      textAlign: "center",
       marginBottom: "20px",
-      textTransform: "uppercase",
     },
     label: {
       display: "block",
-      marginBottom: "8px",
+      marginBottom: "6px",
       fontWeight: "600",
-      color: "#333",
+      color: "#555",
     },
     input: {
-      width: "92%",
-      padding: "10px 15px",
-      marginBottom: "15px",
+      width: "100%",
+      padding: "12px 15px",
+      marginBottom: "18px",
       borderRadius: "10px",
       border: "1px solid #ccc",
       fontSize: "16px",
-      backgroundColor: "#fff",
-      transition: "border 0.3s",
+      outline: "none",
+      backgroundColor: "#fafafa",
     },
     button: {
       width: "100%",
       padding: "12px",
       borderRadius: "8px",
-      backgroundColor: "#2d87f0",
+      backgroundColor: "#7b3fe4",
       color: "white",
       fontWeight: "600",
       fontSize: "16px",
       border: "none",
       cursor: "pointer",
-      transition: "background-color 0.3s, transform 0.3s",
+      transition: "all 0.3s ease",
     },
     buttonHover: {
-      backgroundColor: "#1d6ec6",
-      transform: "scale(1.05)",
+      backgroundColor: "#5d28c9",
     },
     message: {
       marginTop: "15px",
@@ -103,104 +119,105 @@ const App = () => {
       fontWeight: "600",
     },
     toggleText: {
-      marginTop: "15px",
+      marginTop: "20px",
       textAlign: "center",
-      color: "#2d87f0",
+      color: "#7b3fe4",
       cursor: "pointer",
       fontWeight: "600",
       textDecoration: "underline",
-      transition: "color 0.3s",
-    },
-    toggleTextHover: {
-      color: "#1d6ec6",
     },
   };
+
   return (
     <div style={styles.container}>
-      <motion.div
-        style={styles.card}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2 style={styles.heading}>
-          {isRegistering ? "Join the Marketplace" : "Welcome Back"}
-        </h2>
-        <form onSubmit={handleSubmit}>
-          {isRegistering && (
-            <>
-              <label style={styles.label} htmlFor="name">
-                Name
-              </label>
-              <input
-                style={styles.input}
-                type="text"
-                id="name"
-                name="name"
-                value={form.name}
-                onChange={handleInputChange}
-                required
-              />
-              <label style={styles.label} htmlFor="phone">
-                Phone
-              </label>
-              <input
-                style={styles.input}
-                type="text"
-                id="phone"
-                name="phone"
-                value={form.phone}
-                onChange={handleInputChange}
-                required
-              />
-            </>
+      {/* Left: Form Section */}
+      <div style={styles.leftPane}>
+        <motion.div
+          style={styles.card}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 style={styles.heading}>
+            {isRegistering ? "Join the Marketplace" : "Welcome Back"}
+          </h2>
+          <form onSubmit={handleSubmit}>
+            {isRegistering && (
+              <>
+                <label style={styles.label} htmlFor="name">Name</label>
+                <input
+                  style={styles.input}
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={form.name}
+                  onChange={handleInputChange}
+                  required
+                />
+                <label style={styles.label} htmlFor="phone">Phone</label>
+                <input
+                  style={styles.input}
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleInputChange}
+                  required
+                />
+              </>
+            )}
+            <label style={styles.label} htmlFor="email">Email</label>
+            <input
+              style={styles.input}
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleInputChange}
+              required
+            />
+            <label style={styles.label} htmlFor="password">Password</label>
+            <input
+              style={styles.input}
+              type="password"
+              id="password"
+              name="password"
+              value={form.password}
+              onChange={handleInputChange}
+              required
+            />
+            <motion.button
+              type="submit"
+              style={styles.button}
+              whileHover={{ backgroundColor: styles.buttonHover.backgroundColor }}
+            >
+              {isRegistering ? "Register" : "Login"}
+            </motion.button>
+          </form>
+          {message && (
+            <p
+              style={{
+                ...styles.message,
+                color: message.includes("success") ? "green" : "red",
+              }}
+            >
+              {message}
+            </p>
           )}
-          <label style={styles.label} htmlFor="email">
-            Email
-          </label>
-          <input
-            style={styles.input}
-            type="email"
-            id="email"
-            name="email"
-            value={form.email}
-            onChange={handleInputChange}
-            required
-          />
-          <label style={styles.label} htmlFor="password">
-            Password
-          </label>
-          <input
-            style={styles.input}
-            type="password"
-            id="password"
-            name="password"
-            value={form.password}
-            onChange={handleInputChange}
-            required
-          />
-          <motion.button
-            type="submit"
-            style={styles.button}
-            whileHover={{ backgroundColor: styles.buttonHover.backgroundColor }}
-          >
-            {isRegistering ? "Register" : "Login"}
-          </motion.button>
-        </form>
-        {message && (
-          <p
-            style={{
-              ...styles.message,
-              color: message.includes("success") ? "green" : "red",
-            }}
-          >
-            {message}
+          <p style={styles.toggleText} onClick={toggleMode}>
+            {isRegistering ? "Already have an account? Login" : "Don't have an account? Register"}
           </p>
-        )}
-        <p style={styles.toggleText} onClick={toggleMode}>
-          {isRegistering ? "Already have an account? Login" : "Don't have an account? Register"}
-        </p>
-      </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Right: Illustration Section */}
+      <div style={styles.rightPane}>
+        <img
+          src="/login-illustration.webp"
+          alt="Login Illustration"
+          style={styles.illustration}
+        />
+      </div>
     </div>
   );
 };

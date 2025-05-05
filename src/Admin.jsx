@@ -12,7 +12,7 @@ const AdminProductList = () => {
   // Password validation logic
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password === "sam123") {
+    if (password === "geetansh123") {
       setIsAuthenticated(true);
     } else {
       alert("Incorrect password! Access Denied.");

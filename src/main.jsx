@@ -8,6 +8,7 @@ import Home from "./Home.jsx";
 import Sell from "./Sell.jsx";
 import AdminProductList from "./Admin.jsx";
 import AboutUs from "./AboutUs.jsx";
+import ProductList from "./ProductList.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,6 +19,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/sell" element={<Sell />} />
         <Route path="/admin" element={<AdminProductList/>} />
         <Route path="/aboutus" element={<AboutUs/>} />
+        <Route path="/dashboard" element={<ProductList/>} />
       </Routes>
     </Router>
   </StrictMode>
